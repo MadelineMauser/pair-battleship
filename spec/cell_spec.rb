@@ -16,16 +16,17 @@ RSpec.describe(Cell) do
     expect(@cell.coordinate).to(eq("B4"))
   end
 
-  xit("can check if there is a ship") do
-    expect(@ship.cell).to(eq(nil))
+  it("can check if there is a ship") do
+    expect(@cell.ship).to(eq(nil))
   end
 
-  xit("has an empty cell") do
-    expect(@ship.empty?).to(eq(true))
+  it("has an empty cell") do
+    expect(@cell.empty?).to(eq(true))
   end
 
-  xit("can place a ship on cell") do
+  it("can place a ship on cell") do
     @cell.place_ship(@cruiser)
-    expect(@cell.ship).to(eq(false))
+    expect(@cell.ship).to(eq(@cruiser))
+    expect(@cell.empty?).to(eq(false))
   end
 end
