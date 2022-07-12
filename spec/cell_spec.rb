@@ -12,7 +12,7 @@ RSpec.describe(Cell) do
     expect(@cell).to(be_a(Cell))
   end
 
-  xit("has a cell coordinate") do
+  it("has a cell coordinate") do
     expect(@cell.coordinate).to(eq("B4"))
   end
 
