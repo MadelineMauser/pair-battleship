@@ -26,4 +26,9 @@ RSpec.describe(Class) do
   it("has sunk?") do
     expect(@cruiser.sunk?).to(eq(false))
   end
+
+  it("has hit a ship") do
+    @cruiser.hit
+    expect(@cruiser.health).to(eq(2))
+  end
 end
