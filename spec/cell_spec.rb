@@ -31,6 +31,14 @@ RSpec.describe(Cell) do
     expect(@cell_1.empty?).to(eq(false))
   end
 
+  it("can check whether it's been fired upon") do
+    @cell_1.place_ship(@cruiser)
+    expect(@cell_1.fired_upon?).to(eq(false))
+    @cell_1.fire_upon
+    expect(@cell_1.ship.health).to(eq(2))
+    expect(@cell_1.fired_upon?).to(eq(true))
+  end
+
   it("can render an empty cell") do
     expect(@cell_1.render).to(eq("."))
   end
