@@ -39,33 +39,33 @@ RSpec.describe(Cell) do
     expect(@cell_1.fired_upon?).to(eq(true))
   end
 
-  xit("can render an empty cell") do
+  it("can render an empty cell") do
     expect(@cell_1.render).to(eq("."))
   end
 
-  xit("can render a miss") do
+  it("can render a miss") do
     @cell_1.fire_upon
     expect(@cell_1.render).to(eq("M"))
   end
 
-  xit("can render as blank while containing a ship") do
-    @cell_2.place_ship("cruiser")
+  it("can render as blank while containing a ship") do
+    @cell_2.place_ship(@cruiser)
     expect(@cell_2.render).to(eq("."))
   end
 
-  xit("can render a contained ship when needed") do
-    @cell_2.place_ship("cruiser")
+  it("can render a contained ship when needed") do
+    @cell_2.place_ship(@cruiser)
     expect(@cell_2.render(true)).to(eq("S"))
   end
 
-  xit("can render a hit") do
-    @cell_2.place_ship("cruiser")
+  it("can render a hit") do
+    @cell_2.place_ship(@cruiser)
     @cell_2.fire_upon
     expect(@cell_2.render).to(eq("H"))
   end
 
-  xit("can render a sunk ship") do
-    @cell_2.place_ship("cruiser")
+  it("can render a sunk ship") do
+    @cell_2.place_ship(@cruiser)
     @cell_2.fire_upon
     @cruiser.hit
     @cruiser.hit
