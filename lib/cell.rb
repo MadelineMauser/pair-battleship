@@ -31,14 +31,18 @@ class Cell
   end
 
   def render(is_showing_ship = false)
-    if @ship == nil && @is_fired_upon == true
+    if @ship != nil
+      if @is_fired_upon == true && @ship.sunk? == true
+        "X"
+      elsif @is_fired_upon
+        "H"
+      elsif is_showing_ship == true
+        "S"
+      else
+        "."
+      end
+    elsif @is_fired_upon == true
       "M"
-    elsif @is_fired_upon == true && @ship.sunk? == true
-      "X"
-    elsif @ship != nil && @is_fired_upon == true
-      "H"
-    elsif is_showing_ship == true && @ship != nil
-      "S"
     else
       "."
     end
