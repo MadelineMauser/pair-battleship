@@ -6,6 +6,8 @@ require "./lib/cell"
 RSpec.describe(Board) do
   before(:each) do
     @board = Board.new
+    @cruiser = Ship.new("Cruiser", 3)
+    @submarine = Ship.new("Submarine", 2)
   end
 
   it("exists") do
@@ -25,6 +27,17 @@ RSpec.describe(Board) do
     expect(@board.valid_coordinate?("A22")).to(eq(false))
   end
 
-  it("text") do
+  it("num.of coordinates eq.to ship size") do
+    @cruiser = Ship.new("Cruiser", 3)
+    expect(@board.valid_placement?(@cruiser, ["A1", "A2"])).to(eq(false))
+    @submarine = Ship.new("Submarine", 2)
+    expect(@board.valid_placement?(@cruiser, ["A1", "A2"])).to(eq(false))
+  end
+
+  it("can make sure coordinates are consecutive") do
+    @cruiser = Ship.new("Cruiser", 3)
+    expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A4"])).to(eq(false))
+    expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A3"])).to(eq(true))
+    expect(@board.valid_placement?(@cruiser, ["A1", "B1", "C1"])).to(eq(true))
   end
 end
