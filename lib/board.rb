@@ -31,18 +31,31 @@ class Board
     coordinates.each { |coordinate| letters << coordinate[0] }
     numbers = []
     coordinates.each { |coordinate| numbers << coordinate[1] }
-
-    if ship.length == coordinates.size
-      if letters.uniq.count == 1 && (numbers.min..numbers.max).to_a == numbers
-        true
-      elsif numbers.uniq.count == 1 && (letters.min..letters.max).to_a == letters
-        true
+    if coordinates.all? { |coordinate| cells[coordinate].empty?}
+      if ship.length == coordinates.size
+        if letters.uniq.count == 1 && (numbers.min..numbers.max).to_a == numbers
+          true
+        elsif numbers.uniq.count == 1 && (letters.min..letters.max).to_a == letters
+          true
+        else
+          false
+        end
       else
         false
       end
-
-    else
-      false
+    else false
     end
   end
+
+  def place(ship, coordinates)
+    if valid_placement?(ship, coordinates) == true
+      cells.each do |coordinate, cell|
+        if coordinates.any?(coordinate)
+          cell.place_ship(ship)
+        end
+      end
+    end
+  end
+
+
 end
