@@ -22,7 +22,13 @@ class Game
   end
 
   def play
-    puts "#{generate_coordinates(@computer_sub)}"
+
+    ## Place Computer ships on board
+    @computer_board.place(@computer_cruiser, generate_coordinates(@computer_cruiser, @computer_board))
+    @computer_board.place(@computer_sub, generate_coordinates(@computer_sub, @computer_board))
+
+    ##
+
   end
 
   def generate_coordinates(ship, board)
