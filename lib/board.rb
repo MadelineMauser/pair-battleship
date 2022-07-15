@@ -31,7 +31,8 @@ class Board
     coordinates.each { |coordinate| letters << coordinate[0] }
     numbers = []
     coordinates.each { |coordinate| numbers << coordinate[1] }
-    if coordinates.all? { |coordinate| cells[coordinate].empty?}
+
+    if coordinates.all? { |coordinate| cells[coordinate].empty? }
       if ship.length == coordinates.size
         if letters.uniq.count == 1 && (numbers.min..numbers.max).to_a == numbers
           true
@@ -40,22 +41,28 @@ class Board
         else
           false
         end
+
       else
         false
       end
-    else false
+
+    else
+      false
     end
   end
 
   def place(ship, coordinates)
     if valid_placement?(ship, coordinates) == true
+
       cells.each do |coordinate, cell|
         if coordinates.any?(coordinate)
           cell.place_ship(ship)
         end
       end
     end
+
+    def render
+      puts("  1 2 3 4 \nA #{cells["A1"].render} #{cells["A2"].render} #{cells["A3"].render} #{cells["A4"].render}\nB #{cells["B1"].render} #{cells["B2"].render} #{cells["B3"].render} #{cells["B4"].render}\nC #{cells["C1"].render} #{cells["C2"].render} #{cells["C3"].render} #{cells["C4"].render}\nD #{cells["D1"].render} #{cells["D2"].render} #{cells["D3"].render} #{cells["D4"].render}")
+    end
   end
-
-
 end

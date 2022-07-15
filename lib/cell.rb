@@ -25,6 +25,7 @@ class Cell
 
   def fire_upon
     @is_fired_upon = true
+
     if @ship != nil
       @ship.hit
     end
@@ -41,6 +42,7 @@ class Cell
       else
         "."
       end
+
     elsif @is_fired_upon == true
       "M"
     else
