@@ -25,11 +25,11 @@ class Game
     puts "#{generate_coordinates(@computer_sub)}"
   end
 
-  def generate_coordinates(ship)
+  def generate_coordinates(ship, board)
     generated_coordinates = []
     until generated_coordinates != []
       working_coordinates = @computer_board.cells.keys.sample(ship.length)
-      if @computer_board.valid_placement?(ship, working_coordinates)
+      if board.valid_placement?(ship, working_coordinates)
         generated_coordinates = working_coordinates
       end
     end
