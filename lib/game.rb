@@ -26,6 +26,7 @@ class Game
     @computer_board.place(@computer_cruiser, generate_coordinates(@computer_cruiser, @computer_board))
     @computer_board.place(@computer_sub, generate_coordinates(@computer_sub, @computer_board))
     player_setup
+    turn
   end
 
     ##
@@ -72,6 +73,19 @@ class Game
     end
 
     @player_board.place(@player_sub, player_sub_coordinates)
+  end
+
+  def turn
+    puts "COMPUTER BOARD".center(40, "=")
+    @computer_board.render
+    puts "PLAYER BOARD".center(40, "=")
     @player_board.render(true)
+    puts "Enter the coordinate for your shot:"
+    inputted_coordinate = gets.chomp.upcase
+    until @player_board.valid_coordinate?(inputted_coordinate)
+      puts "Please enter a valid coordinate:"
+      inputted_coordinate = gets.chomp.upcase
+    end
+    
   end
 end
