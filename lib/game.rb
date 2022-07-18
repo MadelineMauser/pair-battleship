@@ -26,7 +26,9 @@ class Game
     @computer_board.place(@computer_cruiser, generate_coordinates(@computer_cruiser, @computer_board))
     @computer_board.place(@computer_sub, generate_coordinates(@computer_sub, @computer_board))
     player_setup
+    until (@computer_cruiser.sunk? && @computer_sub.sunk?) || (@player_cruiser.sunk? && @player_sub.sunk?)
     turn
+    end
   end
 
     ##
@@ -82,10 +84,22 @@ class Game
     @player_board.render(true)
     puts "Enter the coordinate for your shot:"
     inputted_coordinate = gets.chomp.upcase
+    until @computer_board.cells[inputted_coordinate].fired_upon? == false
+      puts "You've already fired on this coordinate. \nPlease choose a new coordinate:"
+      inputted_coordinate = gets.chomp.upcase
+    end
     until @player_board.valid_coordinate?(inputted_coordinate)
       puts "Please enter a valid coordinate:"
       inputted_coordinate = gets.chomp.upcase
     end
-    
+    @computer_board.cells[inputted_coordinate].fire_upon
+    working_cell_mark = @computer_board.cells[inputted_coordinate].render
+    if working_cell_mark == "H"
+      puts "Your shot on #{inputted_coordinate} was a hit!"
+    elsif working_cell_mark == "X"
+      puts "Your shot on #{inputted_coordinate} was a hit! Your opponent's ship has sunk!"
+    else
+      puts "Your shot on #{inputted_coordinate} was a miss."
+    end
   end
 end
