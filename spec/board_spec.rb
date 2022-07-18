@@ -74,9 +74,6 @@ RSpec.describe(Board) do
   end
 
   it("can render a board") do
-    require "pry"
-
-    binding.pry
     expect(@board.render).to(eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"))
   end
 end
