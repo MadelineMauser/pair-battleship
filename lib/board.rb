@@ -32,6 +32,7 @@ class Board
     coordinates_empty?(coordinates) && coordinates_eq_ship_length?(ship, coordinates) && (is_horizontal?(letters, numbers) || is_vertical?(letters, numbers))
   end
 
+  #### Helper methods for valid_placement? method
   def coordinates_empty?(coordinates)
     coordinates.all? { |coordinate| cells[coordinate].empty? }
   end
@@ -47,6 +48,7 @@ class Board
   def is_vertical?(letters, numbers)
     numbers.uniq.count == 1 && (letters.min..letters.max).to_a == letters
   end
+  ####
 
   def place(ship, coordinates)
     if valid_placement?(ship, coordinates) == true
