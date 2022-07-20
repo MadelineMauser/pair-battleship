@@ -9,7 +9,7 @@ class Game
     @is_playing = false
   end
 
-  # Welcome screen
+  ## Welcome screen
   def welcome
     puts("Welcome to BATTLESHIP \nEnter p to play. Enter q to quit")
     input = gets.chomp.downcase
@@ -22,6 +22,7 @@ class Game
       welcome
     end
   end
+  ##
 
   # Start of game
   def play
@@ -71,7 +72,7 @@ class Game
     @player_board.render(true)
 
 
-    # Player submarine
+    #Player submarine
     puts("Enter the squares for the Submarine (2 spaces):")
     player_sub_coordinates = []
     until player_sub_coordinates != []
@@ -95,9 +96,8 @@ class Game
     @computer_board.render
     puts "PLAYER BOARD".center(40, "=")
     @player_board.render(true)
-
-    # Player turn
     puts "Enter the coordinate for your shot:"
+
     inputted_coordinate = gets.chomp.upcase
 
     until @player_board.valid_coordinate?(inputted_coordinate)
@@ -121,6 +121,9 @@ class Game
       puts "Your shot on #{inputted_coordinate} was a miss."
     end
   end_game_check
+  if @is_playing == false
+    return
+  end 
 
     ## Computer turn
     # Chooses a cell to fire upon
