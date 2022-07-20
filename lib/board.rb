@@ -27,28 +27,25 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    letters = []
-    coordinates.each { |coordinate| letters << coordinate[0] }
-    numbers = []
-    coordinates.each { |coordinate| numbers << coordinate[1] }
+    letters = coordinates.map { |coordinate| coordinate[0] }
+    numbers = coordinates.map { |coordinate| coordinate[1] }
+    coordinates_empty?(coordinates) && coordinates_eq_ship_length?(ship, coordinates) && (is_horizontal?(letters, numbers) || is_vertical?(letters, numbers))
+  end
 
-    if coordinates.all? { |coordinate| cells[coordinate].empty? }
-      if ship.length == coordinates.size
-        if letters.uniq.count == 1 && (numbers.min..numbers.max).to_a == numbers
-          true
-        elsif numbers.uniq.count == 1 && (letters.min..letters.max).to_a == letters
-          true
-        else
-          false
-        end
+  def coordinates_empty?(coordinates)
+    coordinates.all? { |coordinate| cells[coordinate].empty? }
+  end
 
-      else
-        false
-      end
+  def coordinates_eq_ship_length?(ship, coordinates)
+    ship.length == coordinates.size
+  end
 
-    else
-      false
-    end
+  def is_horizontal?(letters, numbers)
+    letters.uniq.count == 1 && (numbers.min..numbers.max).to_a == numbers
+  end
+
+  def is_vertical?(letters, numbers)
+    numbers.uniq.count == 1 && (letters.min..letters.max).to_a == letters
   end
 
   def place(ship, coordinates)
